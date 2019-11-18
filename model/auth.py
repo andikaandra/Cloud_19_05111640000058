@@ -19,9 +19,7 @@ class Auth_Model(object):
 		self.username = ''
 		self.password = ''
 		self.USERS=[]
-		self.USERS.append({'username' : 'leomessi', 	'password': 'kaoskakimerah123', 'nama': 'Lionel Messi'})
-		self.USERS.append({'username' : 'rakitic', 		'password': 'kaoskakimerah456', 'nama': 'Ivan Rakitic'})
-		self.USERS.append({'username' : 'iniesta',		'password': 'kaoskakimerah789', 'nama': 'Iniesta'})
+		self.USERS.append({'username' : 'andika', 	'password': 'andika123', 'nama': 'Andika Andra'})
 
 	def cek_user(self,username,password):
 		ketemu=None
@@ -52,11 +50,11 @@ class Auth_Model(object):
 
 if __name__ == '__main__':
 	auth = Auth_Model()
-	token = auth.login('slamet','kaoskakimerah')
-	print(token)
-	token = auth.login('leomessi','kaoskakimerah123')
-	print(token.decode())
-	#time.sleep(10)
+	# token = auth.login('slamet','kaoskakimerah')
+	# print(token)
+	# token = auth.login('leomessi','kaoskakimerah123')
+	# print(token.decode())
+	# #time.sleep(10)
 	token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imxlb21lc3NpIiwicGFzc3dvcmQiOiJrYW9za2FraW1lcmFoMTIzIiwibmFtYSI6Ikxpb25lbCBNZXNzaSIsImV4cCI6MTU3MzUxNjI5Nn0.KuEO9EPwQ2esSsyFWZ-dn8rKTkp0MAXhIuu3SpigUSg'
 	cek = auth.cek_token(token)
 	print(cek)
