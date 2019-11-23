@@ -7,4 +7,8 @@ class Youtube_Downloader():
 
     def download(self, link, quality = '', type = ''):
         yt = YouTube(link)
-        yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download(output_path = self.path)
+        try:
+            res = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download(output_path = self.path)
+            return True, res
+        except:
+            return False, None

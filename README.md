@@ -6,17 +6,33 @@ NRP : 05111640000058
 ```
 
 ### How To 
+##### Local Environment (tested)
+- `sh scripts/run-redis.sh`
+- `pip install -r requirements.txt`
+- `python3 app.py`
 
-- on [redis_storage.py](/model/redis_storage.py#L7), change address by your ip address
-- on [run.sh](/run.sh#L3), change address by your ip address
-- build images if not exists `sudo docker build -t phonebook-docker-2:1.0 .`
-- `sh run.sh`
+##### Docker Based Environment (ongoing)
 
 
 ### Test
-- login : `curl -v http://[ip_address]:[port docker container]/auth -X POST -d '{"username": "andika", "password": "andika123"}'`
-- access resouces : `curl http://[ip_address]:[port docker container]/phonebook -H "Authorization: [auth code from login]"`
-- add record to redis : `curl http://[ip_address]:[port docker container]/phonebook -H "Authorization: " -XPOST -d '{"nama" : "andika", "alamat": "melbourne"}'`
+1. login : `curl -v http://localhost:5000/auth -X POST -d '{"username": "andika", "password": "andika123"}'`
+    response: 
+    ```
+    {
+        "status": "OK",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFuZGlrYSIsInBhc3N3b3JkIjoiYW5kaWthMTIzIiwibmFtYSI6IkFuZGlrYSBBbmRyYSIsImV4cCI6MTU3NDUzMjAyM30.GJ2R4IdhBTnTxIdK1b-rlBy6uXYKJ_ZdAMzuFQ8TwVE"
+    }
+    ```
+1. convert video : `curl http://[ip_address]:[port docker container]/phonebook -H "Authorization: [token from step 1]" -XPOST -d '{"link" : "https://www.youtube.com/watch?v=WRz2MxhAdJo"}'`
+    response: 
+    ```
+    {
+        "data": "c9f61102-0e19-11ea-a8a8-386077a7ef2b",
+        "status": "OK"
+    }
+    ```
+2. download your video (use your browser for best experience :))
+    use browser `http://localhost:5000/download/[data from process 2]`
+    use curl `curl -O http://localhost:5000/download/[data from process 2]`
 
-
-ps: fastest way to get your ip addres by `hostname -I`
+ps : token expires in 5 minutes
