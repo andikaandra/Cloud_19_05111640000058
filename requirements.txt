@@ -1,9 +1,7 @@
-greenlet
 flask
-flask_restful
 uuid
-pickledb
-gevent
 redis
-
+pyjwt
+flask-cors
+pytube
 
