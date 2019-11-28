@@ -23,6 +23,13 @@ def route_auth():
         return __get_response(result, code)
 
 
+@app.route('/register', methods = ['POST'])
+def route_register():
+    if request.method == 'POST':
+        post_data = request.get_json(force=True)
+        result, code = auth_service.register_user(post_data)
+        return __get_response(result, code)
+
 @app.route('/youtube/list', methods = ['GET'])
 def route_youtube_list():
     if request.method == 'GET':

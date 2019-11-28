@@ -1,6 +1,12 @@
 import jwt
 import datetime
 import time
+import os
+
+redis_addr = os.getenv("REDISADDR") or "localhost"
+from model.redis_storage import Redis_storage
+
+user_model = Redis_storage(redis_addr)
 
 class Token_Model(object):
 	def __init__(self,data={}):
@@ -21,21 +27,29 @@ class Auth_Model(object):
 		self.USERS.append({'username' : 'andika', 	'password': 'andika123', 'nama': 'Andika Andra'})
 
 	def check_user(self, username, password):
-		ketemu=None
+		found=None
 		for x in self.USERS:
 			if ((x['username']==username) and (x['password']==password)):
-				ketemu=x
+				found=x
 				break
-		return ketemu
+		return found
 
 	def login(self, username, password):
 		user_detail = self.check_user(username,password)
-		if (user_detail is not None):
-			token_expiration = datetime.datetime.utcnow() + datetime.timedelta(minutes=5)
-			user_detail['exp'] = token_expiration
-			return Token_Model(user_detail).get_encoded()
-		else:
+		if (user_detail is None):
 			return None
+		token_expiration = datetime.datetime.utcnow() + datetime.timedelta(minutes=5)
+		user_detail['exp'] = token_expiration
+		return Token_Model(user_detail).get_encoded()
+
+	def register(self, username, password, name = ''):
+		user_detail = self.check_user(username, password)
+		if (user_detail is not None):
+			return None
+		data = {'username' : username, 	'password': password, 'nama': name}
+		self.USERS.append(data)
+		return data
+
 	def check_token(self, data):
 		if data=='':
 			return None
