@@ -1,0 +1,11 @@
+flask
+greenlet
+gevent
+uuid
+redis
+pyjwt
+flask-cors
+pytube
+python3-wget
+requests
+prometheus-flask-exporter
