@@ -1,8 +1,0 @@
-flask
-uuid
-redis
-pyjwt
-flask-cors
-pytube
-python3-wget
-requests
