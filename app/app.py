@@ -8,7 +8,7 @@ import wget
 from prometheus_flask_exporter import PrometheusMetrics
 import redis
 
-redis_addr = os.getenv("REDISADDR") or "localhost"
+# redis = redis.Redis(host='redis', port=6379)
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -30,12 +30,9 @@ def __get_response(response, code):
 
 @app.route('/')
 def main():
-    return redis_addr, 200
-
-# @app.route('/check-redis')
-# def check_redis():
-#     r = redis.Redis('localhost',port=6379,decode_responses=True)
-#     return str(r.ping()), 200
+    # redis.incr('hits')
+    # return 'Hello World! I have been seen %s times.' % redis.get('hits'), 200
+    return 'ok', 200
 
 @app.route('/auth', methods = ['POST'])
 @path_counter
@@ -82,4 +79,7 @@ def route_download(uid):
 if __name__ == "__main__":
     if not os.path.exists('storage'):
         os.makedirs('storage')
-    app.run(host='0.0.0.0', port=5000)
+    # app.run(host='0.0.0.0', port=5000)
+    from gevent.pywsgi import WSGIServer
+    http_server = WSGIServer(('',5000),app)
+    http_server.serve_forever()

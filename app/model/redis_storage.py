@@ -3,7 +3,7 @@ import redis
 import json
 
 class Redis_storage(object):
-    def __init__(self,address='localhost'):
+    def __init__(self,address='redis'):
         self.redis_address = address
         self.db = redis.Redis(self.redis_address,port=6379,decode_responses=True)
     def add(self,p, key = None):

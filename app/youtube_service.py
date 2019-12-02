@@ -7,8 +7,7 @@ from model.redis_storage import Redis_storage
 from model.auth import Auth_Model
 from youtube import Youtube_Downloader
 
-redis_addr = os.getenv("REDISADDR") or "localhost"
-youtube_model = Redis_storage(address=redis_addr)
+youtube_model = Redis_storage()
 youtube_downloader = Youtube_Downloader()
 
 def auth_check(token):

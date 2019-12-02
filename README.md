@@ -6,14 +6,10 @@ NRP : 05111640000058
 ```
 
 ### How To 
-##### Local Environment (tested)
-- `sh app/scripts/run-redis.sh`
-- `pip install -r app/requirements.txt`
-- `python3 app/app.py`
 
-##### Docker Based Environment (ongoing)
-<!-- - `sudo docker-compose up -d`  :)
-- open [http://localhost:3000/d/cloud](http://localhost:3000/d/cloud) to see metrics -->
+##### Docker Based Environment
+- `sudo docker-compose up -d`
+- open [http://localhost:3000/d/cloud](http://localhost:3000/d/cloud) to see metrics
 
 ### Grafana Monitoring
 ![grafana](docs/11006468159522.png)

@@ -4,10 +4,9 @@ import time
 import os
 import json
 
-redis_addr = os.getenv("REDISADDR") or "localhost"
 from model.redis_storage import Redis_storage
 
-user_model = Redis_storage(redis_addr)
+user_model = Redis_storage()
 
 class Token_Model(object):
 	def __init__(self,data={}):
