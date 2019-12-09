@@ -42,6 +42,13 @@ def route_auth():
         result, code = auth_service.auth(post_data)
         return __get_response(result, code)
 
+@app.route('/user-info', methods = ['GET'])
+@path_counter
+def route_user_info():
+    if request.method == 'GET':
+        result, code = auth_service.user_info()
+        return __get_response(result, code)
+
 
 @app.route('/register', methods = ['POST'])
 def route_register():
@@ -75,6 +82,10 @@ def route_download(uid):
             return send_file(full_filename, as_attachment=True)
     return __get_response(jsonify(status="Video Not found"), 500)
 
+@app.route('/flush/redis/<key>')
+def route_flush(key):
+    result, code = youtube_service.youtube_delete(key)
+    return __get_response(result, code)
 
 if __name__ == "__main__":
     if not os.path.exists('storage'):

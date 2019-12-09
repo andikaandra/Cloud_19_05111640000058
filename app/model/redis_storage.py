@@ -16,6 +16,10 @@ class Redis_storage(object):
             uid = uuid.uuid1()
             self.db.set(str(uid) ,  json.dumps(p) )
             return "{}" . format(str(uid))
+    def update(self,key, data):
+        for d in data:
+            self.db.lpush(key, json.dumps(d))
+        return "{}" . format(key)
     def list(self, key = None):
         res = []
         if (key is not None):

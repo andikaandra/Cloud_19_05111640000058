@@ -52,6 +52,10 @@ class Auth_Model(object):
 		user_model.add(data, 'users')
 		return data
 
+	def user_info(self, username):
+		users_detail = user_model.list('users')
+		return users_detail
+
 	def check_token(self, data):
 		if data=='':
 			return None
