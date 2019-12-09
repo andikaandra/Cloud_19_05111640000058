@@ -16,6 +16,9 @@ class Redis_storage(object):
             uid = uuid.uuid1()
             self.db.set(str(uid) ,  json.dumps(p) )
             return "{}" . format(str(uid))
+    def add_video(self,p,key):
+        self.db.set(str(key) ,  json.dumps(p) )
+        return "{}" . format(str(key))
     def update(self,key, data):
         for d in data:
             self.db.lpush(key, json.dumps(d))

@@ -82,9 +82,9 @@ def route_download(uid):
             return send_file(full_filename, as_attachment=True)
     return __get_response(jsonify(status="Video Not found"), 500)
 
-@app.route('/flush/redis/<key>')
-def route_flush(key):
-    result, code = youtube_service.youtube_delete(key)
+@app.route('/flush/redis')
+def route_flush():
+    result, code = youtube_service.youtube_flush()
     return __get_response(result, code)
 
 if __name__ == "__main__":

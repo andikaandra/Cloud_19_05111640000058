@@ -50,7 +50,7 @@ def user_info():
                 "username" : user["username"],
                 "name" : user["nama"],
                 "usage" : user["usage"],
-                "price" : (user["usage"]/1000000)/1000 * 10000,
+                "price" : (user["usage"]/1000000) * 10,
             }
             return jsonify(status='OK',data=data), 200
     return jsonify(status='ERROR'), 501
